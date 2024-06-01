@@ -1,4 +1,4 @@
-import {motion} from "framer-motion";
+import {motion, Variants} from "framer-motion";
 
 const Loaders = () => {
   return (
@@ -8,7 +8,7 @@ const Loaders = () => {
   );
 };
 
-const variants = {
+const variants: Variants = {
   initial: {
     scaleY: 0.5,
     opacity: 0,

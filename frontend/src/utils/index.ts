@@ -1,7 +1,8 @@
 import axios from "axios";
 import { FormFields, FormFieldsLogin, NimType } from "../types";
 
-const API_URL: string = "http://localhost:8000/api";
+// const API_URL: string = "http://localhost:8000/api";
+const API_URL: string = "https://backend.jcraftstudio.my.id/api";
 
 export const register = async (data: FormFields) => {
   const response = await axios.post(`${API_URL}/public/register`, data);

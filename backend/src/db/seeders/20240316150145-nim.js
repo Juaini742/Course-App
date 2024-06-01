@@ -41,6 +41,20 @@ module.exports = {
         createdAt: new Date(),
         UpdatedAt: new Date(),
       },
+      {
+        id: crypto.randomUUID(),
+        userId: null,
+        nim: "56789",
+        createdAt: new Date(),
+        UpdatedAt: new Date(),
+      },
+      {
+        id: crypto.randomUUID(),
+        userId: null,
+        nim: "67890",
+        createdAt: new Date(),
+        UpdatedAt: new Date(),
+      },
     ]);
   },
 

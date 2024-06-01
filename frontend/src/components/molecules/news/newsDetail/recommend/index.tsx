@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
-import {news} from "../../content";
-import {Container} from "../../../atoms";
+import { Container } from "../../../../atoms";
+import { news } from "../../../content";
 
 export const RecommendNewDetailScreen = () => {
   return (

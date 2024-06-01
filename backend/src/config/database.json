@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "Admin123JJ",
-    "database": "course_db",
-    "host": "127.0.0.1",
+    "username": "u861993382_course",
+    "password": "adminJ123",
+    "database": "u861993382_course_db",
+    "host": "153.92.15.21",
     "dialect": "mysql"
   },
   "test": {
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "u861993382_course",
+    "password": "adminJ123",
+    "database": "u861993382_course_db",
+    "host": "153.92.15.21",
     "dialect": "mysql"
   }
 }

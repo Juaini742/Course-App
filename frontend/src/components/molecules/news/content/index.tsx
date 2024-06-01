@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import {Container, Paragraph} from "../../../atoms";
-import {news} from "../../content";
+import { news } from "../../content";
 
 export const ContentNewsScreen = () => {
   return (
