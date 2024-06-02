@@ -3,6 +3,7 @@ dist
 
 .env
 
-dist
 
 backend/src/config/database.json
+
+database.json
