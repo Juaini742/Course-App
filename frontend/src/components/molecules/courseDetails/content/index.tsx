@@ -1,24 +1,32 @@
-import {Link, useParams} from "react-router-dom";
-import {Button, Container} from "../../../atoms";
-import {FaAngleDoubleLeft, FaPlus, FaStar} from "react-icons/fa";
-import {useMutation, useQuery} from "react-query";
-import {addMimberCourse, getOneCourse} from "../../../../utils";
-import {CourseType} from "../../../../types";
+import { Link, useParams } from "react-router-dom";
+import { Button, Container } from "../../../atoms";
+import { FaAngleDoubleLeft, FaPlus, FaStar } from "react-icons/fa";
+import { useMutation, useQuery } from "react-query";
+import { addMemberCourse, getOneCourse } from "../../../../utils";
+import { CourseType } from "../../../../types";
 import Swal from "sweetalert2";
 
 export const ContentCourseDetailScreen = () => {
-  const {id} = useParams();
-  const mutation = useMutation(addMimberCourse);
-  const {data: course} = useQuery<CourseType>(["getOneCourse", id], () =>
-    getOneCourse(id)
+  const { id } = useParams();
+  const mutation = useMutation(addMemberCourse);
+  const { data: course, refetch } = useQuery<CourseType>(
+    ["getOneCourse", id],
+    () => getOneCourse(id)
   );
 
   const handleAddCourse = async () => {
     try {
       await mutation.mutateAsync(id);
-      Swal.fire("Success: User followed the course successfully");
+      Swal.fire({
+        icon: "success",
+        text: "User followed the course successfully",
+      });
+      await refetch();
     } catch (error) {
-      Swal.fire("Error: User already follows this course");
+      Swal.fire({
+        icon: "error",
+        text: "User already follows this course",
+      });
     }
   };
 

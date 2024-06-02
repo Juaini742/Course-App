@@ -22,6 +22,6 @@ router.get("/secured/nim", getNim);
 router.post("/secured/nim", addNim);
 router.get("/secured/getAllCourse", getAllCourse);
 router.get("/secured/getOneCourse/:id", getOneCourse);
-router.post("/secured/addMimberCourse/:id", addMimberCourse);
+router.post("/secured/addMemberCourse/:id", addMimberCourse);
 
 export default router;

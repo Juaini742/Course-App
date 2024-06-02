@@ -1,14 +1,15 @@
-import {useForm} from "react-hook-form";
-import {Button, Paragraph} from "../atoms";
-import {Link} from "react-router-dom";
-import {FormFieldsLogin} from "../../types";
-import {useMutation} from "react-query";
-import {login} from "../../utils";
+import { useForm } from "react-hook-form";
+import { Button, Paragraph } from "../atoms";
+import { Link } from "react-router-dom";
+import { FormFieldsLogin } from "../../types";
+import { useMutation } from "react-query";
+import { login } from "../../utils";
+import Swal from "sweetalert2";
 
 export const LoginScreen = () => {
   const {
     register,
-    formState: {errors},
+    formState: { errors, isSubmitting },
     handleSubmit,
     setError,
   } = useForm<FormFieldsLogin>();
@@ -21,9 +22,12 @@ export const LoginScreen = () => {
   });
 
   const onSubmit = handleSubmit(async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     await mutation.mutate(data);
     if (mutation.isSuccess) {
-      await login(data);
+      return await login(data).then(() => {
+        Swal.fire({ icon: "success", text: "Login successfully!" });
+      });
     }
   });
 
@@ -83,13 +87,17 @@ export const LoginScreen = () => {
           </div>
           <div>
             <span className="text-[10px]">
-              Dont't have account{" "}
+              don't have account{" "}
               <Link to="/register" className="text-red-600">
                 register here
               </Link>
             </span>
-            <Button variant="secondary" className="w-full py-2 text-sm">
-              Login
+            <Button
+              disabled={isSubmitting}
+              variant="secondary"
+              className="w-full py-2 text-sm"
+            >
+              {isSubmitting ? "Loading..." : "Login"}
             </Button>
           </div>
         </form>

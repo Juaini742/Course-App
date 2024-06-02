@@ -1,12 +1,12 @@
-import {Link} from "react-router-dom";
-import {Button, Container, Paragraph} from "../../../atoms";
-import {useQuery} from "react-query";
-import {getAllCourse} from "../../../../utils";
-import {CourseType} from "../../../../types";
-import {FaStar} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { Button, Container, Paragraph } from "../../../atoms";
+import { useQuery } from "react-query";
+import { getAllCourse } from "../../../../utils";
+import { CourseType } from "../../../../types";
+import { FaStar } from "react-icons/fa";
 
 export const ItemCourseScreen = () => {
-  const {data: courses} = useQuery<CourseType>("getAllCourse", getAllCourse);
+  const { data: courses } = useQuery<CourseType>("getAllCourse", getAllCourse);
 
   return (
     <Container className="mt-10">

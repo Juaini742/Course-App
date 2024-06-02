@@ -1,11 +1,11 @@
-import {SubmitHandler, useForm} from "react-hook-form";
-import {Button, Paragraph} from "../atoms";
-import {FaFacebook} from "react-icons/fa";
-import {FcGoogle} from "react-icons/fc";
-import {Link, useNavigate} from "react-router-dom";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {FormFields, schema} from "../../types";
-import {useMutation} from "react-query";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Button, Paragraph } from "../atoms";
+import { FaFacebook } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { Link, useNavigate } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormFields, schema } from "../../types";
+import { useMutation } from "react-query";
 import * as apiUtils from "../../utils";
 import Swal from "sweetalert2";
 
@@ -15,7 +15,7 @@ export const RegisterScreen = () => {
     register,
     handleSubmit,
     setError,
-    formState: {errors, isSubmitting},
+    formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     resolver: zodResolver(schema),
   });
@@ -28,12 +28,18 @@ export const RegisterScreen = () => {
     },
   });
 
-  const hanldeSubmit: SubmitHandler<FormFields> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    mutation.mutate(data);
-    Swal.fire("Registration succesfully!").then(() => {
-      navigate("/login");
-    });
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      mutation.mutate(data);
+      Swal.fire({ icon: "success", text: "Registration successfully!" }).then(
+        () => {
+          navigate("/login");
+        }
+      );
+    } catch {
+      Swal.fire({ icon: "error", text: "Registration failed!" });
+    }
   };
 
   return (
@@ -51,7 +57,7 @@ export const RegisterScreen = () => {
           </p>
         </div>
         <form
-          onSubmit={handleSubmit(hanldeSubmit)}
+          onSubmit={handleSubmit(onSubmit)}
           className="mt-5 w-10/12 flex flex-col gap-2"
         >
           {errors.root && (
@@ -72,13 +78,13 @@ export const RegisterScreen = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="emial" className="text-sm font-prociono">
+            <label htmlFor="email" className="text-sm font-prociono">
               Email
             </label>
             <input
               {...register("email")}
               type="email"
-              id="emial"
+              id="email"
               className="border border-black h-10 pl-4 text-sm font-prociono"
               required
             />
@@ -126,7 +132,7 @@ export const RegisterScreen = () => {
           <Button className="bg-blue-500 flex items-center gap-2 py-1 pl-1 pr-2 rounded-md">
             <span className="bg-white p-1 rounded-sm">
               <FcGoogle />
-</span>
+            </span>
             <p className="text-[10px] text-white">Sign in with Google</p>
           </Button>
           <Button className="bg-blue-800 flex items-center gap-2 py-1 pl-1 pr-2 rounded-md">

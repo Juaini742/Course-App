@@ -1,11 +1,11 @@
-import {Swiper, SwiperSlide} from "swiper/react";
-import {EffectCoverflow, Pagination} from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import {Link} from "react-router-dom";
-import {Button, Container, Paragraph} from "../../../atoms";
-import {news} from "../../content";
-import {FaAngleRight} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { Button, Container, Paragraph } from "../../../atoms";
+import { news } from "../../content";
+import { FaAngleRight } from "react-icons/fa";
 
 export const ExtracurricularHomeScrees = () => {
   return (

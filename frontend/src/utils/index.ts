@@ -1,8 +1,7 @@
 import axios from "axios";
 import { FormFields, FormFieldsLogin, NimType } from "../types";
 
-// const API_URL: string = "http://localhost:8000/api";
-const API_URL: string = "https://backend.jcraftstudio.my.id/api";
+const API_URL: string = "http://localhost:8000/api";
 
 export const register = async (data: FormFields) => {
   const response = await axios.post(`${API_URL}/public/register`, data);
@@ -38,7 +37,7 @@ export const verifyNim = async (data: NimType) => {
   });
 
   if (!response) {
-    throw new Error("Erro fetching Data");
+    throw new Error("Error fetching Data");
   } else {
     window.location.href = "/";
   }
@@ -66,7 +65,7 @@ export const getUser = async () => {
   });
 
   if (!response) {
-    throw new Error("Erro fetching Data");
+    throw new Error("Error fetching Data");
   }
 
   return response.data;
@@ -78,7 +77,7 @@ export const getAllCourse = async () => {
   });
 
   if (!response) {
-    throw new Error("Erro fetching Data");
+    throw new Error("Error fetching Data");
   }
 
   return response.data;
@@ -90,15 +89,15 @@ export const getOneCourse = async (id?: string) => {
   });
 
   if (!response) {
-    throw new Error("Erro fetching Data");
+    throw new Error("Error fetching Data");
   }
 
   return response.data;
 };
 
-export const addMimberCourse = async (id?: string) => {
+export const addMemberCourse = async (id?: string) => {
   const response = await axios.post(
-    `${API_URL}/secured/addMimberCourse/${id}`,
+    `${API_URL}/secured/addMemberCourse/${id}`,
     null,
     {
       withCredentials: true,
@@ -106,7 +105,7 @@ export const addMimberCourse = async (id?: string) => {
   );
 
   if (!response) {
-    throw new Error("Erro fetching Data");
+    throw new Error("Error fetching Data");
   }
 
   return response.data;
