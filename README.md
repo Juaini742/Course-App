@@ -104,10 +104,12 @@ To start using the MyFashion Frontend, follow these steps:
 
 ## Usage
 
-Before running the application for the backend, make sure to set up the following environment variables:
+1. Before running the application for the backend, make sure to set up the following environment variables:
 
 `SERVER_PORT`: Port of server
 `JWT_SECRET_KEY`: jsonwebtoken secret
+
+2. Edit database.example.json to be database.json
 
 ## Components
 
