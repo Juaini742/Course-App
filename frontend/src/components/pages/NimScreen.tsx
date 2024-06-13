@@ -1,17 +1,17 @@
-import {useForm} from "react-hook-form";
-import {Button, Paragraph} from "../atoms";
-import {NimType} from "../../types";
-import {useMutation} from "react-query";
-import {verifyNim} from "../../utils";
+import { useForm } from "react-hook-form";
+import { Button, Paragraph } from "../atoms";
+import { NimType } from "../../types";
+import { useMutation, useQuery } from "react-query";
+import { getAllNims, verifyNim } from "../../utils";
 
 function NimScreen() {
   const {
     register,
-    formState: {errors},
+    formState: { errors },
     handleSubmit,
     setError,
   } = useForm<NimType>();
-
+  const { data } = useQuery<NimType[]>("getAllNims", getAllNims);
   const mutation = useMutation((data: NimType) => verifyNim(data), {
     onError: () => {
       setError("root", {
@@ -32,12 +32,24 @@ function NimScreen() {
         <div className="w-32 flex justify-center overflow-hidden">
           <img src="../images/register.svg" alt="register" />
         </div>
+
         <div>
           <Paragraph variant="title">Welcome to UkomUniversity</Paragraph>
+          <div className="w-full mt-3">
+            <select className="w-full border border-black px-3 py-2  outline-none">
+              <option value="">Choose you nim</option>
+              {data?.map((item) => (
+                <option key={item.nim} value={item.nim}>
+                  {item.nim} {item.User !== null && "Has been used"}
+                </option>
+              ))}
+            </select>
+          </div>
           <p className="text-[11px] text-center mt-3">
             Please inter your nim bellow this fill
           </p>
         </div>
+
         <form onSubmit={onSubmit} className="mt-5 w-10/12 flex flex-col gap-2">
           {errors.root && (
             <span className="text-[10px] text-red-600 text-center">
@@ -65,8 +77,12 @@ function NimScreen() {
             )}
           </div>
           <div>
-            <Button variant="secondary" className="w-full py-2 text-sm">
-              Save
+            <Button
+              disabled={mutation.isLoading}
+              variant="secondary"
+              className="w-full py-2 text-sm"
+            >
+              {mutation.isLoading ? "Loading.." : "Save"}
             </Button>
           </div>
         </form>

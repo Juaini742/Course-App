@@ -135,7 +135,10 @@ export const RegisterScreen = () => {
             </span>
             <p className="text-[10px] text-white">Sign in with Google</p>
           </Button>
-          <Button className="bg-blue-800 flex items-center gap-2 py-1 pl-1 pr-2 rounded-md">
+          <Button
+            disabled={mutation.isLoading}
+            className="bg-blue-800 flex items-center gap-2 py-1 pl-1 pr-2 rounded-md"
+          >
             <span className="bg-white p-1 rounded-sm">
               <FaFacebook />
             </span>

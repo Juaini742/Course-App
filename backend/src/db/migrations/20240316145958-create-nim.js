@@ -11,6 +11,10 @@ module.exports = {
       },
       userId: {
         type: Sequelize.STRING,
+        references: {
+          model: "Users",
+          key: "id",
+        },
       },
       nim: {
         type: Sequelize.STRING,

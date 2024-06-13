@@ -69,9 +69,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     res.cookie("auth_token", token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "none",
-      domain: "localhost",
       maxAge: 86400000,
     });
 
@@ -120,6 +119,9 @@ export const getUser = async (req: Request, res: Response): Promise<void> => {
 export const logout = async (req: Request, res: Response) => {
   res.cookie("auth_token", "", {
     expires: new Date(0),
+    secure: process.env.NODE_ENV === "production",
+    httpOnly: true,
+    sameSite: "none",
   });
 
   const userId = req.userId;
@@ -141,6 +143,26 @@ export const getNim = async (_req: Request, res: Response): Promise<void> => {
     res.status(500).json({ error: "Something error" });
   }
 };
+
+export const getAllNims = async (_req: Request, res: Response) => {
+  try {
+    const nimData = await Nim.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["username"],
+        },
+      ],
+      attributes: { exclude: ["userId"] },
+    });
+
+    res.status(200).json(nimData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json("Internal Server Error");
+  }
+};
+
 export const addNim = async (req: Request, res: Response): Promise<void> => {
   try {
     const { nim } = req.body;

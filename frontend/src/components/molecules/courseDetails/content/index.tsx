@@ -39,11 +39,18 @@ export const ContentCourseDetailScreen = () => {
           </Button>
         </Link>
         <Button
+          disabled={mutation.isLoading}
           variant="secondary"
           onClick={handleAddCourse}
           className="px-5 py-2 flex items-center gap-1"
         >
-          <FaPlus /> Follow Course
+          {mutation.isLoading ? (
+            "Loading..."
+          ) : (
+            <>
+              <FaPlus /> Follow Course
+            </>
+          )}
         </Button>
       </div>
       <div className="overflow-hidden rounded-xl lg:h-[600px] flex items-center">

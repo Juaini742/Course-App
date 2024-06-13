@@ -1,5 +1,5 @@
-import {NavigateFunction} from "react-router-dom";
-import {z} from "zod";
+import { NavigateFunction } from "react-router-dom";
+import { z } from "zod";
 
 export type FormFields = z.infer<typeof schema>;
 
@@ -23,8 +23,12 @@ export type UserType = {
 };
 
 export type NimType = {
+  id?: string;
   nim?: string;
   userId: string;
+  User?: {
+    username: string;
+  };
 };
 
 type MimbersType = {

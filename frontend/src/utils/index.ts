@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FormFields, FormFieldsLogin, NimType } from "../types";
 
-const API_URL: string = "http://localhost:8000/api";
+const API_URL: string = "https://course-api.jcraftstudio.my.id/api";
 
 export const register = async (data: FormFields) => {
   const response = await axios.post(`${API_URL}/public/register`, data);
@@ -29,6 +29,18 @@ export const login = async (data: FormFieldsLogin) => {
   }
 
   return userId;
+};
+
+export const getAllNims = async () => {
+  const response = await axios.get(`${API_URL}/public/nims`, {
+    withCredentials: true,
+  });
+
+  if (!response) {
+    throw new Error("Error fetching Data");
+  }
+
+  return response.data;
 };
 
 export const verifyNim = async (data: NimType) => {

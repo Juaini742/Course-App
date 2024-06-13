@@ -4,6 +4,7 @@ import {
   addMimberCourse,
   addNim,
   getAllCourse,
+  getAllNims,
   getNim,
   getOneCourse,
   getUser,
@@ -13,6 +14,7 @@ const router = express.Router();
 const authRouter = require("./router.auth");
 
 router.use("/public", authRouter);
+router.get("/public/nims", getAllNims);
 
 // secured
 router.use([verifyToken]);

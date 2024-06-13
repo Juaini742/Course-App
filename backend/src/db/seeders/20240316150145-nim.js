@@ -1,4 +1,10 @@
 "use strict";
+const crypto = require("crypto");
+
+function generateNextNIM(lastNIM) {
+  let nextNumber = parseInt(lastNIM) + 1;
+  return nextNumber.toString();
+}
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -12,50 +18,22 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    await queryInterface.bulkInsert("Nims", [
-      {
+
+    let lastNIM = "123456";
+    const nimsToInsert = [];
+    for (let i = 0; i < 100; i++) {
+      lastNIM = generateNextNIM(lastNIM);
+      nimsToInsert.push({
         id: crypto.randomUUID(),
         userId: null,
-        nim: "12345",
+        nim: lastNIM,
         createdAt: new Date(),
-        UpdatedAt: new Date(),
-      },
-      {
-        id: crypto.randomUUID(),
-        userId: null,
-        nim: "23456",
-        createdAt: new Date(),
-        UpdatedAt: new Date(),
-      },
-      {
-        id: crypto.randomUUID(),
-        userId: null,
-        nim: "34567",
-        createdAt: new Date(),
-        UpdatedAt: new Date(),
-      },
-      {
-        id: crypto.randomUUID(),
-        userId: null,
-        nim: "45678",
-        createdAt: new Date(),
-        UpdatedAt: new Date(),
-      },
-      {
-        id: crypto.randomUUID(),
-        userId: null,
-        nim: "56789",
-        createdAt: new Date(),
-        UpdatedAt: new Date(),
-      },
-      {
-        id: crypto.randomUUID(),
-        userId: null,
-        nim: "67890",
-        createdAt: new Date(),
-        UpdatedAt: new Date(),
-      },
-    ]);
+        updatedAt: new Date(),
+      });
+    }
+
+
+    await queryInterface.bulkInsert("Nims", nimsToInsert);
   },
 
   async down(queryInterface, Sequelize) {
